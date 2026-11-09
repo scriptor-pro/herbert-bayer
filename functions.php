@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('HERBERT_BAYER_VERSION')) {
-    define('HERBERT_BAYER_VERSION', '0.3.3');
+    define('HERBERT_BAYER_VERSION', '0.3.4');
 }
 
 // Une seule URL pour les deux familles, sinon Bunny Fonts ignore la seconde.

@@ -14,6 +14,8 @@ Thème WordPress classique d'inspiration Bauhaus, accessible (WCAG 2.1 AA) et sa
 - Textes de l'interface en français.
 - Un menu (« Menu principal ») et une barre latérale ; sans widget, la mise en page passe sur une colonne.
 - Images à la une et intégrations responsives.
+- Signature des articles (« par Auteur », avec lien vers la page de l'auteur).
+- Articles sans titre : titre de remplacement « Billet du *date* », qui sert de titre principal et de lien dans les listes (le titre enregistré n'est pas modifié).
 
 ## Prérequis
 
