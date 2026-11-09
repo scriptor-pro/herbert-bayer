@@ -4,7 +4,7 @@ Theme URI: https://github.com/scriptor-pro/herbert-bayer
 Author: Baudouin
 Author URI: https://somebaudy.com
 Description: Thème classique Bauhaus, accessible et minimal.
-Version: 0.3.4
+Version: 0.3.5
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: herbert-bayer
@@ -84,9 +84,31 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-img {
+img,
+video {
   max-width: 100%;
   height: auto;
+}
+
+/* Vidéos intégrées (lecteurs YouTube, Vimeo, TED, Flickr, MP4 locaux) :
+   pleine largeur du texte, format 16/9, sans débordement sur mobile. */
+.video-integree {
+  margin: var(--space-2) 0;
+}
+
+.video-integree iframe,
+.video-integree video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  background: var(--color-text);
+}
+
+/* Autres iframes anciennes du contenu : jamais plus larges que la colonne. */
+.entry-content iframe {
+  max-width: 100%;
 }
 
 .site-header,
