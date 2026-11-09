@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('HERBERT_BAYER_VERSION')) {
-    define('HERBERT_BAYER_VERSION', '0.3.2');
+    define('HERBERT_BAYER_VERSION', '0.3.3');
 }
 
 // Une seule URL pour les deux familles, sinon Bunny Fonts ignore la seconde.
@@ -105,6 +105,51 @@ function herbert_bayer_posted_on(): void
         esc_html(get_the_date())
     );
 }
+
+// Signature des articles : « · par Auteur », avec lien vers la page de l'auteur.
+// Le point médian est décoratif : masqué aux lecteurs d'écran.
+function herbert_bayer_posted_by(): void
+{
+    if (get_post_type() !== 'post') {
+        return;
+    }
+
+    printf(
+        '<span class="byline"><span aria-hidden="true"> · </span>%1$s <a href="%2$s" rel="author">%3$s</a></span>',
+        esc_html__('par', 'herbert-bayer'),
+        esc_url(get_author_posts_url((int) get_the_author_meta('ID'))),
+        esc_html(get_the_author())
+    );
+}
+
+/**
+ * Titre de remplacement pour les articles sans titre : « Billet du 11 septembre 2009 ».
+ * Sert de titre principal (h1) et de lien dans les listes. Seulement sur le site
+ * public : ni dans l'administration, ni dans l'API REST, ni dans les flux.
+ * Le titre enregistré dans la base n'est pas modifié.
+ * On teste le titre enregistré (et non $title) : pour les liens précédent/suivant,
+ * WordPress remplace déjà un titre vide par « Article précédent » avant ce filtre.
+ */
+function herbert_bayer_untitled_post_title(string $title, $post_id = 0): string
+{
+    if (
+        !$post_id
+        || trim((string) get_post_field('post_title', $post_id)) !== ''
+        || is_admin()
+        || is_feed()
+        || wp_is_serving_rest_request()
+        || get_post_type($post_id) !== 'post'
+    ) {
+        return $title;
+    }
+
+    return sprintf(
+        /* translators: %s: date de publication de l'article. */
+        __('Billet du %s', 'herbert-bayer'),
+        get_the_date('', $post_id)
+    );
+}
+add_filter('the_title', 'herbert_bayer_untitled_post_title', 10, 2);
 
 function herbert_bayer_entry_footer(): void
 {

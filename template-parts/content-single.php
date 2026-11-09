@@ -3,7 +3,7 @@
 <article <?php post_class(); ?>>
   <header class="content-header">
     <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-    <div class="entry-meta"><?php herbert_bayer_posted_on(); ?></div>
+    <div class="entry-meta"><?php herbert_bayer_posted_on(); herbert_bayer_posted_by(); ?></div>
   </header>
   <?php if (has_post_thumbnail()) : ?>
     <figure class="post-thumbnail">
